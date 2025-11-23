@@ -6,7 +6,7 @@ PIECE_VALUES = {
     'pawn': 100,
     'knight': 320,
     'bishop': 330,
-    'right': 500,  # Similar to rook
+    'right': 500,  
     'queen': 900,
     'king': 20000
 }
