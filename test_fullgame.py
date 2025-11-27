@@ -5,9 +5,12 @@ from chessmaker.chess.base import Board
 from extension.board_utils import print_board_ascii, copy_piece_move
 from extension.board_rules import get_result, thinking_with_timeout, THINKING_TIME_BUDGET, GAME_TIME_BUDGET
 from samples import white, black, sample0, sample1
-from agent1 import agent
+from agent2 import agent as agent2
+from agent1 import agent as agent1
+from agent import agent
 from opponent import opponent
 
+res_arr = []
 
 def make_custom_board(board_sample):
     # player1: white vs player2: black
@@ -78,8 +81,10 @@ def testgame_timeout(p_white, p_black, board_sample):
 
             print_board_ascii(board)
             res = get_result(board)
+            
             if res:
                 print(f"=== Game ended: {res} ===")
+                res_arr.append(res)
                 break
 
         except KeyboardInterrupt:
@@ -87,4 +92,6 @@ def testgame_timeout(p_white, p_black, board_sample):
             sys.exit()
 
 if __name__ == "__main__":
-    testgame_timeout(p_white=agent, p_black=opponent, board_sample=sample0)
+    for _ in range(3):
+        testgame_timeout(p_white=agent2, p_black=agent1, board_sample=sample1)
+    print(res_arr)
