@@ -1,0 +1,353 @@
+nnn1c23 
+Agent plays as: black 
+  0 1 2 3 4
+0 n q k b r
+1 p p p p p
+2 . . . . .
+3 P P P P P
+4 N Q K B R
+ 1: white - time thinking this move: 1.32479702308774
+ Right (Player (white)) move to: (3,2) 
+  0 1 2 3 4
+0 n q k b r
+1 p p p p p
+2 . . . R .
+3 P P P P P
+4 N Q K B .
+ 2: black - time thinking this move: 0.02148645999841392
+ Pawn (Player (black)) move to: (3,2) 
+  0 1 2 3 4
+0 n q k b r
+1 p p . p p
+2 . . . p .
+3 P P P P P
+4 N Q K B .
+ 3: white - time thinking this move: 2.9396187050733715
+ Pawn (Player (white)) move to: (3,2) 
+  0 1 2 3 4
+0 n q k b r
+1 p p . p p
+2 . . . P .
+3 P P . P P
+4 N Q K B .
+ 4: black - time thinking this move: 0.03231621999293566
+ Pawn (Player (black)) move to: (3,2) 
+  0 1 2 3 4
+0 n q k b r
+1 p p . p .
+2 . . . p .
+3 P P . P P
+4 N Q K B .
+ 5: white - time thinking this move: 5.247621985850856
+ Pawn (Player (white)) move to: (3,2) 
+  0 1 2 3 4
+0 n q k b r
+1 p p . p .
+2 . . . P .
+3 P P . P .
+4 N Q K B .
+ 6: black - time thinking this move: 0.05863094795495272
+ Bishop (Player (black)) move to: (0,3) 
+  0 1 2 3 4
+0 n q k . r
+1 p p . p .
+2 . . . P .
+3 b P . P .
+4 N Q K B .
+ 7: white - time thinking this move: 5.0478839909192175
+ Queen (Player (white)) move to: (0,3) 
+  0 1 2 3 4
+0 n q k . r
+1 p p . p .
+2 . . . P .
+3 Q P . P .
+4 N . K B .
+ 8: black - time thinking this move: 0.03528530290350318
+ Right (Player (black)) move to: (3,2) 
+  0 1 2 3 4
+0 n q k . .
+1 p p . p .
+2 . . . r .
+3 Q P . P .
+4 N . K B .
+ 9: white - time thinking this move: 1.0607155440375209
+ King (Player (white)) move to: (2,3) 
+  0 1 2 3 4
+0 n q k . .
+1 p p . p .
+2 . . . r .
+3 Q P K P .
+4 N . . B .
+ 10: black - time thinking this move: 0.04765356704592705
+ Right (Player (black)) move to: (1,3) 
+  0 1 2 3 4
+0 n q k . .
+1 p p . p .
+2 . . . . .
+3 Q r K P .
+4 N . . B .
+ 11: white - time thinking this move: 0.9334674889687449
+ Queen (Player (white)) move to: (1,3) 
+  0 1 2 3 4
+0 n q k . .
+1 p p . p .
+2 . . . . .
+3 . Q K P .
+4 N . . B .
+ 12: black - time thinking this move: 0.029801992001011968
+ Knight (Player (black)) move to: (1,2) 
+  0 1 2 3 4
+0 . q k . .
+1 p p . p .
+2 . n . . .
+3 . Q K P .
+4 N . . B .
+ 13: white - time thinking this move: 2.5339906609151512
+ Knight (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . q k . .
+1 p p . p .
+2 . N . . .
+3 . Q K P .
+4 . . . B .
+ 14: black - time thinking this move: 0.02516537602059543
+ Pawn (Player (black)) move to: (1,2) 
+  0 1 2 3 4
+0 . q k . .
+1 . p . p .
+2 . p . . .
+3 . Q K P .
+4 . . . B .
+ 15: white - time thinking this move: 0.45285469805821776
+ Queen (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . q k . .
+1 . p . p .
+2 . Q . . .
+3 . . K P .
+4 . . . B .
+ 16: black - time thinking this move: 0.012546785874292254
+ Queen (Player (black)) move to: (2,1) 
+  0 1 2 3 4
+0 . . k . .
+1 . p q p .
+2 . Q . . .
+3 . . K P .
+4 . . . B .
+ 17: white - time thinking this move: 0.8218955839984119
+ Queen (Player (white)) move to: (2,1) 
+  0 1 2 3 4
+0 . . k . .
+1 . p Q p .
+2 . . . . .
+3 . . K P .
+4 . . . B .
+ 18: black - time thinking this move: 0.006440491881221533
+ King (Player (black)) move to: (2,1) 
+  0 1 2 3 4
+0 . . . . .
+1 . p k p .
+2 . . . . .
+3 . . K P .
+4 . . . B .
+ 19: white - time thinking this move: 0.41873335698619485
+ King (Player (white)) move to: (1,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . p k p .
+2 . . . . .
+3 . K . P .
+4 . . . B .
+ 20: black - time thinking this move: 0.011559969978407025
+ Pawn (Player (black)) move to: (1,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . k p .
+2 . p . . .
+3 . K . P .
+4 . . . B .
+ 21: white - time thinking this move: 0.7781703069340438
+ Bishop (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . k p .
+2 . B . . .
+3 . K . P .
+4 . . . . .
+ 22: black - time thinking this move: 0.019632061012089252
+ King (Player (black)) move to: (3,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . p .
+2 . B . k .
+3 . K . P .
+4 . . . . .
+ 23: white - time thinking this move: 0.5462935611139983
+ King (Player (white)) move to: (2,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . p .
+2 . B . k .
+3 . . . P .
+4 . . K . .
+ 24: black - time thinking this move: 0.01190955308265984
+ King (Player (black)) move to: (4,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . p .
+2 . B . . .
+3 . . . P k
+4 . . K . .
+ 25: white - time thinking this move: 0.3216278941836208
+ Bishop (Player (white)) move to: (2,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . p .
+2 . . . . .
+3 . . B P k
+4 . . K . .
+ 26: black - time thinking this move: 0.006545773008838296
+ Pawn (Player (black)) move to: (3,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . B P k
+4 . . K . .
+ 27: white - time thinking this move: 0.15824533603154123
+ Bishop (Player (white)) move to: (3,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P k
+4 . . K B .
+ 28: black - time thinking this move: 0.00756960385479033
+ King (Player (black)) move to: (4,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P .
+4 . . K B k
+ 29: white - time thinking this move: 0.12393181608058512
+ Bishop (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P .
+4 . . K . k
+ 30: black - time thinking this move: 0.005998082924634218
+ King (Player (black)) move to: (4,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P k
+4 . . K . .
+ 31: white - time thinking this move: 0.16031125490553677
+ Bishop (Player (white)) move to: (3,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P k
+4 . . K B .
+ 32: black - time thinking this move: 0.005650270031765103
+ King (Player (black)) move to: (4,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P .
+4 . . K B k
+ 33: white - time thinking this move: 0.13775308290496469
+ Bishop (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P .
+4 . . K . k
+ 34: black - time thinking this move: 0.005982769187539816
+ King (Player (black)) move to: (4,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P k
+4 . . K . .
+ 35: white - time thinking this move: 0.152391011826694
+ Bishop (Player (white)) move to: (3,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P k
+4 . . K B .
+ 36: black - time thinking this move: 0.006968013010919094
+ King (Player (black)) move to: (4,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P .
+4 . . K B k
+ 37: white - time thinking this move: 0.11584224598482251
+ Bishop (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P .
+4 . . K . k
+ 38: black - time thinking this move: 0.013123645912855864
+ King (Player (black)) move to: (4,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P k
+4 . . K . .
+ 39: white - time thinking this move: 0.1757815380115062
+ Bishop (Player (white)) move to: (3,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P k
+4 . . K B .
+ 40: black - time thinking this move: 0.010299704037606716
+ King (Player (black)) move to: (4,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P .
+4 . . K B k
+ 41: white - time thinking this move: 0.12836421886458993
+ Bishop (Player (white)) move to: (1,2) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P .
+4 . . K . k
+ 42: black - time thinking this move: 0.005846607964485884
+ King (Player (black)) move to: (4,3) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . B . p .
+3 . . . P k
+4 . . K . .
+ 43: white - time thinking this move: 0.158031920902431
+ Bishop (Player (white)) move to: (3,4) 
+  0 1 2 3 4
+0 . . . . .
+1 . . . . .
+2 . . . p .
+3 . . . P k
+4 . . K B .
+ === Game ended: Draw - fivefold repetition === 

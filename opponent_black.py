@@ -1,5 +1,9 @@
+# Reverse-engineered opponent agent based on game1.txt analysis
+# Black player strategy: aggressive captures, strategic positioning
+
 import random
 import time
+import math
 from extension.board_utils import list_legal_moves_for
 
 PIECE_VALUES = {
@@ -8,92 +12,41 @@ PIECE_VALUES = {
     'bishop': 330,
     'right': 500,  
     'queen': 900,
-    'king': 20000
+    'king': 4000 
 }
 
-PAWN_TABLE = [
-    [0,  0,  0,  0,  0],
-    [50, 50, 50, 50, 50],
-    [10, 10, 20, 30, 10],
-    [5,  5, 10, 25,  5],
-    [0,  0,  0, 20,  0]
-]
-
-KNIGHT_TABLE = [
-    [-50, -40, -30, -40, -50],
-    [-40, -20,  0,   0, -40],
-    [-30,  0,  10,  15, -30],
-    [-40,  0,  15,  10, -40],
-    [-50, -40, -30, -40, -50]
-]
-
-KING_TABLE = [
-    [-30, -40, -40, -50, -30],
-    [-30, -40, -40, -50, -30],
-    [-30, -40, -40, -50, -30],
-    [-20, -30, -30, -40, -20],
-    [20,  20,   0,   0,  20]
-]
-
 def evaluate_position(board, player):
-
+    """Simple evaluation function prioritizing material and captures"""
     score = 0
     opponent = board.players[1] if board.players[0] == player else board.players[0]
     
+    # Material count
     for piece in board.get_player_pieces(player):
         piece_value = PIECE_VALUES.get(piece.name.lower(), 0)
         score += piece_value
-        
-        pos = piece.position
-        if piece.name.lower() == 'pawn':
-            if player.name == "white":
-                score += PAWN_TABLE[pos.y][pos.x]
-            else:
-                score += PAWN_TABLE[4 - pos.y][pos.x]
-        elif piece.name.lower() == 'knight':
-            score += KNIGHT_TABLE[pos.y][pos.x]
-        elif piece.name.lower() == 'king':
-            score += KING_TABLE[pos.y][pos.x]
     
     for piece in board.get_player_pieces(opponent):
         piece_value = PIECE_VALUES.get(piece.name.lower(), 0)
         score -= piece_value
-        
-        pos = piece.position
-        if piece.name.lower() == 'pawn':
-            if opponent.name == "white":
-                score -= PAWN_TABLE[pos.y][pos.x]
-            else:
-                score -= PAWN_TABLE[4 - pos.y][pos.x]
-        elif piece.name.lower() == 'knight':
-            score -= KNIGHT_TABLE[pos.y][pos.x]
-        elif piece.name.lower() == 'king':
-            score -= KING_TABLE[pos.y][pos.x]
     
+    # Mobility bonus
     player_moves = len(list_legal_moves_for(board, player))
     opponent_moves = len(list_legal_moves_for(board, opponent))
-    score += (player_moves - opponent_moves) * 10
+    score += (player_moves - opponent_moves) * 5
     
-    for piece in board.get_player_pieces(player):
-        if piece.name.lower() == 'king':
-            try:
-                if hasattr(piece, 'is_in_check') and piece.is_in_check():
-                    score -= 50
-            except:
-                pass
-    
+    # Check bonus
     for piece in board.get_player_pieces(opponent):
         if piece.name.lower() == 'king':
             try:
                 if hasattr(piece, 'is_in_check') and piece.is_in_check():
-                    score += 50
+                    score += 100
             except:
                 pass
     
     return score
 
 def order_moves(board, player, moves):
-
+    """Order moves: captures first (especially high-value), then by position"""
     scored_moves = []
     
     for piece, move in moves:
@@ -101,23 +54,30 @@ def order_moves(board, player, moves):
         
         dest = getattr(move, "position", None)
         if dest:
+            # Check for captures - prioritize high-value captures
             for opp_piece in board.get_pieces():
                 if opp_piece.player != player and opp_piece.position == dest:
-                    score += PIECE_VALUES.get(opp_piece.name.lower(), 0) * 10
-                    score -= PIECE_VALUES.get(piece.name.lower(), 0)
+                    capture_value = PIECE_VALUES.get(opp_piece.name.lower(), 0)
+                    piece_value = PIECE_VALUES.get(piece.name.lower(), 0)
+                    # High bonus for capturing valuable pieces
+                    score += capture_value * 20
+                    # Small penalty for losing piece value
+                    score -= piece_value * 0.1
                     break
         
+        # Center control bonus
         if dest:
             center_distance = abs(dest.x - 2) + abs(dest.y - 2)
-            score -= center_distance * 5
+            score -= center_distance * 3
         
         scored_moves.append((score, piece, move))
     
+    # Sort by score (highest first)
     scored_moves.sort(reverse=True, key=lambda x: x[0])
     return [(piece, move) for _, piece, move in scored_moves]
 
 def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, time_limit):
-
+    """Minimax with alpha-beta pruning"""
     if time.time() - start_time > time_limit * 0.95:
         return evaluate_position(board, player)
     
@@ -135,7 +95,7 @@ def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, ti
             return -999999  
         else:
             return 999999   
-
+    
     legal_moves = order_moves(board, current_player, legal_moves)
     
     if maximizing_player:
@@ -143,9 +103,7 @@ def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, ti
         for piece, move in legal_moves:
             try:
                 move.make()
-                
                 eval_score = minimax(board, depth - 1, alpha, beta, False, player, start_time, time_limit)
-                
                 move.undo()
                 
                 max_eval = max(max_eval, eval_score)
@@ -154,7 +112,6 @@ def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, ti
                 if beta <= alpha:
                     break  
             except Exception as e:
-
                 try:
                     move.undo()
                 except:
@@ -165,13 +122,8 @@ def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, ti
         min_eval = float('inf')
         for piece, move in legal_moves:
             try:
-
                 move.make()
-                
-
                 eval_score = minimax(board, depth - 1, alpha, beta, True, player, start_time, time_limit)
-                
-
                 move.undo()
                 
                 min_eval = min(min_eval, eval_score)
@@ -180,7 +132,6 @@ def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, ti
                 if beta <= alpha:
                     break  
             except Exception as e:
-
                 try:
                     move.undo()
                 except:
@@ -188,9 +139,40 @@ def minimax(board, depth, alpha, beta, maximizing_player, player, start_time, ti
                 continue
         return min_eval
 
+def filter_repeated_moves(board, legal_moves, position_history, player):
+    """Filter out moves that would lead to excessive repetitions"""
+    filtered = []
+    for piece, move in legal_moves:
+        try:
+            move.make()
+            pos_hash = board.fen()
+            reps = position_history.get(pos_hash, 0)
+            
+            # Avoid moves that would lead to 4+ repetitions
+            if reps < 4:
+                filtered.append((piece, move))
+            move.undo()
+        except:
+            try:
+                move.undo()
+            except:
+                pass
+            continue
+    return filtered if filtered else legal_moves
+
 def agent(board, player, var):
-    time_limit = getattr(var, 'thinking_time', 5.0)
+    """
+    Black opponent agent reverse-engineered from game1.txt
+    Strategy: Aggressive captures, strategic positioning, avoid repetition
+    """
+    time_limit = getattr(var, 'thinking_time', 5.0) if hasattr(var, 'thinking_time') else var[1] if isinstance(var, list) else 5.0
     start_time = time.time()
+    
+    # Build position history to avoid repetition
+    position_history = {}
+    if hasattr(board, 'get_position_history'):
+        for pos in board.get_position_history():
+            position_history[pos] = position_history.get(pos, 0) + 1
     
     legal_moves = list_legal_moves_for(board, player)
     
@@ -200,12 +182,17 @@ def agent(board, player, var):
     if len(legal_moves) == 1:
         return legal_moves[0]
     
+    # Filter out moves causing excessive repetition
+    legal_moves = filter_repeated_moves(board, legal_moves, position_history, player)
+    
+    # Order moves (captures first)
     legal_moves = order_moves(board, player, legal_moves)
     
     best_move = legal_moves[0]
     best_score = -float('inf')
     
-    for depth in range(1, 15): 
+    # Iterative deepening minimax
+    for depth in range(1, 12): 
         if time.time() - start_time > time_limit * 0.75:  
             break
         
@@ -218,10 +205,8 @@ def agent(board, player, var):
             
             try:
                 move.make()
-                
                 score = minimax(board, depth - 1, -float('inf'), float('inf'), 
                               False, player, start_time, time_limit)
-                
                 move.undo()
                 
                 if score > current_best_score:
@@ -239,28 +224,3 @@ def agent(board, player, var):
             best_score = current_best_score
     
     return best_move
-
-"""
-def my_minimax(board, depth, position, alpha, beta, maximizing_player):
-    if depth == 0 or board.is_game_over():
-        return evaluate_position(board, position)
-    if maximizing_player:
-        maxEval = -float('inf')
-        for moves in list_legal_moves_for(board, position):
-            eval = my_minimax(board, depth - 1, moves, False)
-            maxEval = max(maxEval, eval)
-            alpha = max(alpha, eval)
-            if beta <= alpha:
-                break
-        return maxEval
-
-    else: 
-        minEval = float('inf')
-        for moves in list_legal_moves_for(board, position):
-            eval = my_minimax(board, depth - 1, moves, True)
-            minEval = min(minEval, eval)
-            beta = min(beta, eval)
-            if beta <= alpha:
-                break
-        return minEval
-"""
